@@ -11,6 +11,27 @@ var db = require("./models");
 
 var app = express();
 
+app.use(express.static("public"));
+
+mongoose.Promise = Promise;
+mongoose.connect("mongodb://localhost/newsdb", {
+	// useMongoClient: true
+});
+
+//db
+// db.User.create({ name: "Betty White" })
+// 	.then(function(dbUser){
+// 		console.log(dbUser);
+// 	})
+// 	.catch(function(err) {
+// 		console.log(err.message);
+// 	});
+
+//Routes
+app.get("/", function(req, res){
+	
+})
+
 console.log("Grabbing articles");
 
 request("http://www.nytimes.com", function(error, response, html) {
@@ -33,3 +54,13 @@ request("http://www.nytimes.com", function(error, response, html) {
 
 	console.log(results);
 });
+
+// app.post("/articles/:id", function(req, res){
+// 	db.Articles.create(req, body).then(function(dbArticle){
+// 		return db.Article.find({title: })
+// 	})
+// })
+
+app.listen(PORT, function() {
+	console.log("App running on port " + PORT + "!");
+  });
